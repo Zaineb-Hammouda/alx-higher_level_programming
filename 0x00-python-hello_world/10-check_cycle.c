@@ -5,18 +5,16 @@
  * @list: pointer to head of the linked list
  * Return: 0 if no cycle, 1 if cycle
  */
-#define MAX_SIZE 150
+#define MAX_SIZE 20
 int check_cycle(listint_t *list)
 {
 	int i = 0;
 	listint_t *tmp;
-	listint_t *head;
 	listint_t **arr = malloc(sizeof(listint_t *) * MAX_SIZE);
 
-	head = list;
-	tmp = head;
+	tmp = list;
 	tmp = tmp->next;
-	arr[0] = head;
+	arr[0] = list;
 	arr[1] = NULL;
 	while (tmp)
 	{
