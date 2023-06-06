@@ -1,4 +1,4 @@
-#0x00-python-hello_world
+# 0x00-python-hello_world
 
 This project is an introductory project to high-level programming and python by ALX_AFRICA
 
