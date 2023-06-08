@@ -1,6 +1,6 @@
 #include "lists.h"
 #include <stdlib.h>
-
+#include <stdio.h>
 /**
  * insert_node - inserts a number into a sorted singly linked list
  * Return: the address of a new node or NULL if failed
@@ -27,10 +27,17 @@ listint_t *insert_node(listint_t **head, int number)
 		{
 			newNode->next = traverse->next;
 			traverse->next = newNode;
+			break;
+		}
+		else if (traverse->n > number)
+		{
+			*head = newNode;
+			newNode->next = traverse->next;
+			break;
 		}
 		traverse = traverse->next;
 	}
-	if (newNode == NULL)
+	if (newNode->next == NULL)
 		traverse->next = newNode;
 	return (newNode);
 }
