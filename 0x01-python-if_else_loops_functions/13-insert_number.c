@@ -35,9 +35,17 @@ listint_t *insert_node(listint_t **head, int number)
 			newNode->next = traverse->next;
 			break;
 		}
+		else if (traverse->n <= number && traverse->next == NULL)
+		{
+			traverse->next = newNode;
+			break;
+		}
 		traverse = traverse->next;
 	}
 	if (newNode->next == NULL)
-		traverse->next = newNode;
+	{
+		newNode->next = *head;
+		traverse = newNode;
+	}
 	return (newNode);
 }
