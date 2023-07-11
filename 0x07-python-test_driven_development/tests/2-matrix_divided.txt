@@ -1,0 +1,94 @@
+the ``2-matrix_divided`` module
+====================
+
+Using ``matrix_divided``
+--------------------
+
+importing the function from the module:
+	>>> m_d = __import__("2-matrix_divided").matrix_divided
+
+check module docstring:
+	>>> mod = __import__("2-matrix_divided").__doc__
+	>>> len(mod) > 1
+	True
+
+check function docstring:
+	>>> func = __import__("2-matrix_divided").matrix_divided.__doc__
+	>>> len(func) > 1
+	True
+
+check regular case, matrix with int:
+	>>> matrix = [[1, 2, 3], [4, 5.0, 6]]
+	>>> m_d(matrix, 3)
+	[[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+	>>> matrix
+	[[1, 2, 3], [4, 5.0, 6]]
+
+check matrix with float:
+	>>> matrix = [[1, 2, 3], [4, 5, 6]]
+        >>> m_d(matrix, 0.5)
+        [[2.0, 4.0, 6.0], [8.0, 10.0, 12.0]]
+
+check negative numbers:
+	>>> matrix = [[-1, -2, -3], [-4, -5, -6]]
+	>>> m_d(matrix, 3)
+	[[-0.33, -0.67, -1.0], [-1.33, -1.67, -2.0]]
+        >>> matrix
+	[[-1, -2, -3], [-4, -5, -6]]
+
+check matrix containing a string:
+	>>> matrix = [[1, "b"], [2, 4]]
+        >>> m_d(matrix, 3)
+        Traceback (most recent call last):
+	...
+	TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+check matrix of different size rows:
+	>>> matrix = [[1, 2, 3], [4, 5]]
+        >>> m_d(matrix, 2)
+	Traceback (most recent call last):
+	...
+	TypeError: Each row of the matrix must have the same size
+
+check list not matrix:
+	>>> list = [1, 2, 3]
+	>>> m_d(list, 2)
+	Traceback (most recent call last):
+	...
+	TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+check div is a string:
+	>>> matrix = [[1, 2, 3], [4, 5, 9]]
+        >>> m_d(matrix, "hey")
+	Traceback (most recent call last):
+	...
+	TypeError: div must be a number
+
+check div is zero:
+	>>> matrix = [[1, 2, 3], [4, 5, 9]]
+        >>> m_d(matrix, 0)
+        Traceback (most recent call last):
+        ...
+        ZeroDivisionError: division by zero
+
+check no arguments:
+	>>> m_d()
+	Traceback (most recent call last):
+	...
+	TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
+
+check missing 1 argument:
+	>>> m_d(matrix)
+	Traceback (most recent call last):
+	...
+	TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+check div is inf:
+	>>> matrix = [[1, 2, 3], [3, 4, 5]]
+	>>> m_d(matrix, float('inf'))
+	[[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+
+Check for division with inf:
+	 >>> matrix = [[1, float('inf'), 3], [4, 5, 6]]
+	 >>> m_d(matrix, 1)
+         [[1.0, inf, 3.0], [4.0, 5.0, 6.0]]
