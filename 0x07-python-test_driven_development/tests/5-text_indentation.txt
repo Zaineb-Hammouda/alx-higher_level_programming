@@ -1,0 +1,70 @@
+The ``5-`text_indentation` module
+======================
+
+using ``text_indentation``
+-------------------
+
+Import the function from the module:
+	>>> text_indentation = __import__("5-text_indentation").text_indentation
+
+Check for module docstring:
+	 >>> mod = __import__("5-text_indentation").__doc__
+	 >>> len(mod) > 1
+	 True
+
+Check for function docstring:
+	 >>> func = __import__("5-text_indentation").text_indentation.__doc__
+         >>> len(func) > 1
+         True
+
+check if text is string:
+	>>> text_indentation("hello: my name is zee. who are you?")
+	hello:
+	<BLANKLINE>
+	my name is zee.
+	<BLANKLINE>
+	who are you?
+	<BLANKLINE>
+
+Check with text is not a string:
+         >>> text_indentation(1)
+         Traceback (most recent call last):
+         ...
+         TypeError: text must be a string
+
+Check for no arguments:
+	 >>> text_indentation()
+	 Traceback (most recent call last):
+	 ...
+	 TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+Check for too many args:
+	 >>> text_indentation("Hello", "zee")
+	 Traceback (most recent call last):
+	 ...
+	 TypeError: text_indentation() takes 1 positional argument but 2 were given
+
+Check for text ending in special char:
+	 >>> text_indentation("""Lorem ipsum dolor sit amet, consectetur adipiscing elit.""")
+	 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+	 <BLANKLINE>
+
+Check for ending in non-special char:
+	>>> text_indentation("""Lorem ipsum dolor sit amet, consectetur adipiscing elit""")
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
+Check for multiple spaces at beginning and end:
+	 >>> text_indentation("   Heyy.  zee?   ")
+	 Heyy.
+	 <BLANKLINE>
+	 zee?
+	 <BLANKLINE>
+
+check for only special chars:
+	 >>> text_indentation(" . ? : ")
+	 .
+	 <BLANKLINE>
+	 ?
+	 <BLANKLINE>
+	 :
+	 <BLANKLINE>
