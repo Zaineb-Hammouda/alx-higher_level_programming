@@ -1,0 +1,107 @@
+The ``101-lazy_matrix_mul`` module
+======================
+
+using ``lazy_matrix_mul``
+-------------------
+
+import the function lazy_matrix_mul() from the module:
+	>>> matrix_mul = __import__("101-lazy_matrix_mul").lazy_matrix_mul
+
+Check for module docstring:
+	 >>> mod = __import__("101-lazy_matrix_mul").__doc__
+	 >>> len(mod) > 1
+	 True
+
+Check for function docstring:
+	 >>> func = __import__("101-lazy_matrix_mul").lazy_matrix_mul.__doc__
+         >>> len(func) > 1
+         True
+
+check for regular case with ints:
+	>>> matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
+	array([[ 7, 10],
+	       [15, 22]])
+
+Check for passing int as m_a:
+	 >>> matrix_mul(4, [[1, 2], [3, 4]])
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: Scalar operands are not allowed, use '*' instead
+
+Check for passing non-list to m_b:
+	 >>> matrix_mul([[1, 2], [3, 4]], 5)
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: Scalar operands are not allowed, use '*' instead
+
+Check for empty m_a:
+	 >>> matrix_mul([], [[2, 5], [3, 7]])
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: shapes (0,) and (2,2) not aligned: 0 (dim 0) != 2 (dim 0)
+
+Check for m_a with empty rows:
+	 >>> matrix_mul([[], []], [[2, 2], [3, 3]])
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: shapes (2,0) and (2,2) not aligned: 0 (dim 1) != 2 (dim 0)
+
+Check for empty m_b:
+	 >>> matrix_mul([[1, 2], [3, 4]], [])
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: shapes (2,2) and (0,) not aligned: 2 (dim 1) != 0 (dim 0)
+
+Check for m_b with empty rows:
+	 >>> matrix_mul([[1, 2], [1, 2]], [[]])
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: shapes (2,2) and (1,0) not aligned: 2 (dim 1) != 1 (dim 0)
+
+Check for uneven rows in m_a:
+	 >>> matrix_mul([[1, 2, 3], [4, 5]], [[1, 2], [3, 4]])
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: setting an array element with a sequence.
+
+Check for uneven rows in m_b:
+	 >>> matrix_mul([[1, 2], [3, 4]], [[1, 2, 3], [4, 5]])
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: setting an array element with a sequence.
+
+Check for string in m_a:
+	 >>> matrix_mul([["zee", 2], [3, 4]], [[1, 2], [3, 4]])
+	 Traceback (most recent call last):
+	 ...
+	 TypeError: invalid data type for einsum
+
+Check for string in m_b:
+	 >>> matrix_mul([[1, 2], [3, 4]], [["zee", 2], [3, 4]])
+	 Traceback (most recent call last):
+	 ...
+	 TypeError: invalid data type for einsum
+
+Check for matrices that can't be multiplied:
+	 >>> matrix_mul([[1, 2, 3], [4, 5, 6]], [[1, 2], [3, 4]])
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: shapes (2,3) and (2,2) not aligned: 3 (dim 1) != 2 (dim 0)
+
+Check for no args:
+         >>> matrix_mul()
+         Traceback (most recent call last):
+         ...
+         TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
+Check for one argument only:
+         >>> matrix_mul([[7, 5], [6, 4]])
+         Traceback (most recent call last):
+         ...
+         TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
+
+Check for 3 arguments instead of 2:
+         >>> matrix_mul([[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]])
+         Traceback (most recent call last):
+         ...
+         TypeError: lazy_matrix_mul() takes 2 positional arguments but 3 were given
