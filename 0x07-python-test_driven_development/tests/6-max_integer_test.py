@@ -71,6 +71,10 @@ class TestMaxInteger(unittest.TestCase):
         """tests if no args are passed"""
         self.assertIsNone(max_integer())
 
+    def test_one_element(self):
+        """tests if only 1 element is in list"""
+        a = [10]
+        self.assertEqual(max_integer(a), 10)
 
 if __name__ == '__main__':
     unittest.main()
