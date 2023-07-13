@@ -15,11 +15,11 @@ class Student:
     def to_json(self, attrs=None):
         """ retrieves a dic rep of a student instance """
         a_dict = {}
-        if attrs != None:
+        if attrs is not None:
             for a in attrs:
                 try:
                     a_dict[a] = self.__dict__[a]
-                except:
+                except Exception:
                     pass
             return a_dict
         else:
