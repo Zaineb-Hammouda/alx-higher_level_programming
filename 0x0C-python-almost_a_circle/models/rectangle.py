@@ -71,10 +71,11 @@ class Rectangle(Base):
 
     def display(self):
         """ prints the rectangle instance with the char "#" """
-        for i in range(self.__height):
-            for j in range(self.__width):
-                print("#", end="")
+        for i in range(self.y):
             print()
+        for j in range(self.height):
+            print(" " * self.x + "#" * self.width)
 
     def __str__(self):
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+        return "[Rectangle] ({}) {}/{} - {}/{}\
+                ".format(self.id, self.x, self.y, self.width, self.height)
