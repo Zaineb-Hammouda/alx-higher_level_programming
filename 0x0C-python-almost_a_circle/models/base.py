@@ -10,6 +10,7 @@ class Base:
     defines a class instance base
     """
     __nb_objects = 0
+
     def __init__(self, id=None):
         """
         initializes public instance attributes
