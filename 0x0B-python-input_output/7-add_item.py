@@ -18,5 +18,5 @@ if len(sys.argv) > 1:
     for i in range(len(sys.argv) - 1):
         x = sys.argv[i + 1]
         j_list.append(x)
- 
+
 save_to_json_file(j_list, "add_item.json")
