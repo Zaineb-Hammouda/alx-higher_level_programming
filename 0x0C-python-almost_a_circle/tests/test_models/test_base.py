@@ -63,25 +63,16 @@ class test_to_json_string(unittest.TestCase):
         j_dict = Base.to_json_string([{'id': 12}])
         self.assertEqual('[{"id": 12}]', j_dict)
 
-    """
-    def test_allNegative(self):
-        a = [-1, -2, -20, -10, -15]
-        self.assertEqual(max_integer(a), -1)
+class test_from_json_srting(unittest.TestCase):
+    """unittest class to test from_json_string method"""
+    def test_empty_string(self):
+        output = Rectangle.from_json_string("[]")
+        self.assertEqual([], output)
 
-    def test_not_int(self):
-        a = [1, 2, 3, "4", 5]
-        with self.assertRaises(TypeError):
-            max_integer(a)
+    def test_None_input(self):
+        output = Rectangle.from_json_string(None)
+        self.assertEqual([], output)
 
-    def test_not_list(self):
-        with self.assertRaises(TypeError):
-            max_integer(4)
-
-    def test_empty(self):
-        a = []
-        self.assertIsNone(max_integer(a))
-
-    def test_None(self):
-        with self.assertRaises(TypeError):
-            max_integer(None)
-	"""
+    def test_return_list(self):
+        j_list = Base.from_json_string('[{"id": 12}]')
+        self.assertEqual([{'id': 12}], j_list)
