@@ -23,15 +23,26 @@ class TestBase(unittest.TestCase):
         base2 = Base(None)
         self.assertEqual(base1.id, base2.id - 1)
 
-    """def test_ 
-    def test_max_beginning(self):
-        a = [22, 2, 3, 10, 15]
-        self.assertEqual(max_integer(a), 22)
+    def test_id(self):
+        b = Base(89)
+        self.assertEqual(89, b.id)
 
-    def test_max_end(self):
-        a = [1, 2, 3, 10, 15]
-        self.assertEqual(max_integer(a), 15)
+    def test_idPublic(self):
+        b = Base(89)
+        b.id = 5
+        self.assertEqual(5, b.id)
 
+    def test_nb_instances(self):
+        with self.assertRaises(AttributeError):
+            print(Base(3).__nb_instances)
+
+    def test_id_no_arg(self):
+        a = Base()
+        b = Base(98)
+        c = Base()
+        self.assertEqual(a.id, c.id - 1)
+
+    """
     def test_max_mid(self):
         a = [1, 2, 20, 10, 15]
         self.assertEqual(max_integer(a), 20)
