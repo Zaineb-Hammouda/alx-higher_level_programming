@@ -76,6 +76,11 @@ class Rectangle(Base):
         for j in range(self.height):
             print(" " * self.x + "#" * self.width)
 
+    def to_dictionary(self):
+        """ returns a dict representation of a rectangle"""
+        return {'id': self.id, 'width': self.width,
+                'height': self.height, 'x': self.x, 'y': self.y}
+
     def update(self, *args, **kwargs):
         """ updates attributes """
         if args:
@@ -110,10 +115,6 @@ class Rectangle(Base):
                     self.x = value
                 elif key == "y":
                     self.y = value
-
-    def to_dictionary(self):
-        return {'id': self.id, 'width': self.width,
-                'height': self.height, 'x': self.x, 'y': self.y}
 
     def __str__(self):
         m = "[Rectangle] ({}) {}/{} ".format(self.id, self.x, self.y)
