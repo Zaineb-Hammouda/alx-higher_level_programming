@@ -76,9 +76,9 @@ class Square(Rectangle):
             print()
         for j in range(self.height):
             print(" " * self.x + "#" * self.width)
-
+    """
     def update(self, *args, **kwargs):
-        updates attributes
+        """updates attributes"""
         if args:
             arg = 0
             for i in args:
@@ -90,8 +90,6 @@ class Square(Rectangle):
                 elif arg == 1:
                     self.width = i
                 elif arg == 2:
-                    self.height = i
-                elif arg == 3:
                     self.x = i
                 else:
                     self.y = i
@@ -103,15 +101,13 @@ class Square(Rectangle):
                         self.id = value
                     else:
                         self.__init__(self.width, self.height, self.x, self.y)
-                elif key == "width":
+                elif key == "size":
                     self.width = value
-                elif key == "height":
-                    self.height = value
                 elif key == "x":
                     self.x = value
                 elif key == "y":
                     self.y = value
-    """
+
     def __str__(self):
         m = "[Square] ({}) {}/{} ".format(self.id, self.x, self.y)
         n = "- {}".format(self.width)
