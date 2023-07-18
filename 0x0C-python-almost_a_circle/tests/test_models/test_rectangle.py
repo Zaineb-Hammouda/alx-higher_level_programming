@@ -111,19 +111,21 @@ class test_display(unittest.TestCase):
         rect = "\n ##\n ##\n"
         self.assertEqual(rect, m.getvalue())
 
-    """
-    def test_empty(self):
-        j_dict = Base.to_json_string([])
-        self.assertEqual("[]", j_dict)
+class test_to_dict(unittest.TestCase):
+    """unittest class for to_dictionary method"""
+    def test_dict_all(self):
+        r1 = Rectangle(10, 2, 1, 9)
+        r1_dict = {'id': 15, 'width': 10, 'height': 2, 'x': 1, 'y': 9}
+        self.assertEqual(r1_dict, r1.to_dictionary())
 
-    def test_return(self):
-        j_dict = Base.to_json_string([{'id': 12}])
-        self.assertEqual('[{"id": 12}]', j_dict)
+    def test_dict_noXY(self):
+        r1 = Rectangle(10, 2)
+        r1_dict = {'id': 16, 'width': 10, 'height': 2, 'x': 0, 'y': 0}
+        self.assertEqual(r1_dict, r1.to_dictionary())
 
-class test_from_json_srting(unittest.TestCase):
-    """
-    """
-    unittest class to test from_json_string method
+class test_update(unittest.TestCase):
+    """unittest class for the update method"""
+"""
     def test_empty_string(self):
         output = Rectangle.from_json_string("[]")
         self.assertEqual([], output)
