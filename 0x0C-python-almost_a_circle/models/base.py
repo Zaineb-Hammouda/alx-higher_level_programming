@@ -4,6 +4,8 @@ the base module
 defines a class Base
 """
 import json
+import os
+import os.path
 
 
 class Base:
@@ -54,9 +56,25 @@ class Base:
     def create(cls, **dictionary):
         """ returns an instance with all attrs set"""
         if dictionary:
-            if cls.__name__ is "Rectangle":
+            if cls.__name__ == "Rectangle":
                 rectangle = cls(6, 5)
             else:
                 rectangle = cls(6)
             rectangle.update(**dictionary)
             return rectangle
+
+    @classmethod
+    def load_from_file(cls):
+        """ returns a list of instances"""
+        filename = cls.__name__ + ".json"
+        if os.path.isfile(filename) is True:
+            with open(filename, "r", encoding="utf-8") as f:
+                read = f.read()
+                jlist = Base.from_json_string(read)
+                ilist = []
+                for i in jlist:
+                    instance = cls.create(**i)
+                    ilist.append(instance)
+                return ilist
+        else:
+            return []
