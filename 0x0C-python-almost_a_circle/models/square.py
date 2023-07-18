@@ -82,6 +82,7 @@ class Square(Rectangle):
         """ returns a dict representation of a square"""
         return {'id': self.id, 'size': self.width,
                 'x': self.x, 'y': self.y}
+
     def update(self, *args, **kwargs):
         """updates attributes"""
         if args:
