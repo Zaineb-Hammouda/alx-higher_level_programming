@@ -5,6 +5,8 @@ Unittest for Base()
 """
 import unittest
 from models.base import Base
+from models.rectangle import Rectangle
+from models.square import Square
 
 
 class TestBase(unittest.TestCase):
@@ -42,15 +44,26 @@ class TestBase(unittest.TestCase):
         c = Base()
         self.assertEqual(a.id, c.id - 1)
 
+class test_to_json_string(unittest.TestCase):
+    """unittest class to test to_json_string method"""
+    def test_type(self):
+        r1 = Rectangle(10, 7, 2, 8)
+        j_dict = Base.to_json_string([r1.to_dictionary()])
+        self.assertEqual(str, type(j_dict))
+
+    def test_None(self):
+        j_dict = Base.to_json_string(None)
+        self.assertEqual("[]", j_dict)
+
+    def test_empty(self):
+        j_dict = Base.to_json_string([])
+        self.assertEqual("[]", j_dict)
+
+    def test_return(self):
+        j_dict = Base.to_json_string([{'id': 12}])
+        self.assertEqual('[{"id": 12}]', j_dict)
+
     """
-    def test_max_mid(self):
-        a = [1, 2, 20, 10, 15]
-        self.assertEqual(max_integer(a), 20)
-
-    def test_negAndpos(self):
-        a = [-1, 2, -20, 10, -15]
-        self.assertEqual(max_integer(a), 10)
-
     def test_allNegative(self):
         a = [-1, -2, -20, -10, -15]
         self.assertEqual(max_integer(a), -1)
