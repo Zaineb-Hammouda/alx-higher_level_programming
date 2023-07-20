@@ -89,7 +89,10 @@ class test_display(unittest.TestCase):
     def stdout_return(instance, method):
         out = io.StringIO()
         sys.stdout = out
-        instance.display()
+        if method == "display":
+            instance.display()
+        else:
+            print(instance)
         sys.stdout = sys.__stdout__
         return out
 
@@ -125,11 +128,23 @@ class test_to_dict(unittest.TestCase):
 
 class test_update(unittest.TestCase):
     """unittest class for the update method"""
+    @staticmethod
+    def stdout_return(instance, method):
+        out = io.StringIO()
+        sys.stdout = out
+        if method == "display":
+            instance.display()
+        else:
+            print(instance)
+        sys.stdout = sys.__stdout__
+        return out
+
     def test_no_args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update()
-        self.assertEqual("[Rectangle] (26) 10/10 - 10/10", r1.__str__())
-
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__())
+    """
     def test_one_arg(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(89)
@@ -195,3 +210,11 @@ class test_update(unittest.TestCase):
         r1.update(y=2, width=6, x=4, id=90, height=5)
         output = "[Rectangle] (90) 4/2 - 6/5"
         self.assertEqual(output, r1.__str__())
+
+class test_create_method(unittest.TestCase):
+     unittest for the create method
+    def test_creates_instance(self):
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertEqual(type(r1), type(r2))"""

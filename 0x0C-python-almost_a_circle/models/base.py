@@ -6,6 +6,7 @@ defines a class Base
 import json
 import os
 import os.path
+import csv
 
 
 class Base:
@@ -66,6 +67,30 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """ returns a list of instances"""
+        filename = cls.__name__ + ".json"
+        if os.path.isfile(filename) is True:
+            with open(filename, "r", encoding="utf-8") as f:
+                read = f.read()
+                jlist = Base.from_json_string(read)
+                ilist = []
+                for i in jlist:
+                    instance = cls.create(**i)
+                    ilist.append(instance)
+                return ilist
+        else:
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """ serializes in csv"""
+        filename = cls.__name__ + ".csv"
+        with open(filename, "w", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(list_objs)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """deserializes a csv file"""
         filename = cls.__name__ + ".json"
         if os.path.isfile(filename) is True:
             with open(filename, "r", encoding="utf-8") as f:
