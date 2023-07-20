@@ -84,9 +84,17 @@ class Base:
     def save_to_file_csv(cls, list_objs):
         """ serializes in csv"""
         filename = cls.__name__ + ".csv"
-        with open(filename, "w", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow(list_objs)
+        with open(filename, "w", newline="") as f:
+            if list_objs is None:
+                f.write("[]")
+            else:
+                if cls.__name__ == "Square":
+                    csv_format = ["id", "size", "x", "y"]
+                else:
+                    csv_format = ["id", "width", "height", "x", "y"]
+                writer = csv.DictWriter(f, fieldnames=csv_format)
+                for i in list_objs:
+                    writer.writerow(i.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
