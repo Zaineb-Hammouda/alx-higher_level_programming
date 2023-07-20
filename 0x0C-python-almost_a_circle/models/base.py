@@ -90,7 +90,7 @@ class Base:
             else:
                 if cls.__name__ == "Square":
                     csv_format = ["id", "size", "x", "y"]
-                else:
+                elif cls.__name__ == "Rectangle":
                     csv_format = ["id", "width", "height", "x", "y"]
                 writer = csv.DictWriter(f, fieldnames=csv_format)
                 for i in list_objs:
@@ -99,15 +99,16 @@ class Base:
     @classmethod
     def load_from_file_csv(cls):
         """deserializes a csv file"""
-        filename = cls.__name__ + ".json"
+        filename = cls.__name__ + ".csv"
         if os.path.isfile(filename) is True:
-            with open(filename, "r", encoding="utf-8") as f:
-                read = f.read()
-                jlist = Base.from_json_string(read)
-                ilist = []
-                for i in jlist:
-                    instance = cls.create(**i)
-                    ilist.append(instance)
-                return ilist
+            with open(filename, "r", newline="") as f:
+                if cls.__name__ == "Square":
+                    csv_format = ["id", "size", "x", "y"]
+                elif cls.__name__ == "Rectangle":
+                    csv_format = ["id", "width", "height", "x", "y"]
+
+                ldct = csv.DictReader(f, fieldnames=csv_format)
+                ldct = [dict([k, int(v)] for k, v in d.items()) for d in ldct]
+                return [cls.create(**d) for d in ldct]
         else:
             return []
