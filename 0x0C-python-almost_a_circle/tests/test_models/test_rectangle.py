@@ -125,16 +125,73 @@ class test_to_dict(unittest.TestCase):
 
 class test_update(unittest.TestCase):
     """unittest class for the update method"""
-"""
-    def test_empty_string(self):
-        output = Rectangle.from_json_string("[]")
-        self.assertEqual([], output)
+    def test_no_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update()
+        self.assertEqual("[Rectangle] (26) 10/10 - 10/10", r1.__str__())
 
-    def test_None_input(self):
-        output = Rectangle.from_json_string(None)
-        self.assertEqual([], output)
+    def test_one_arg(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89)
+        output = "[Rectangle] (89) 10/10 - 10/10"
+        self.assertEqual(output, r1.__str__())
 
-    def test_return_list(self):
-        j_list = Base.from_json_string('[{"id": 12}]')
-        self.assertEqual([{'id': 12}], j_list)
-        """
+    def test_two_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2)
+        output = "[Rectangle] (89) 10/10 - 2/10"
+        self.assertEqual(output, r1.__str__())
+
+    def test_3_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2, 3)
+        output = "[Rectangle] (89) 10/10 - 2/3"
+        self.assertEqual(output, r1.__str__())
+
+    def test_4_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2, 3, 4)
+        output = "[Rectangle] (89) 4/10 - 2/3"
+        self.assertEqual(output, r1.__str__())
+
+    def test_5_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2, 3, 4, 5)
+        output = "[Rectangle] (89) 4/5 - 2/3"
+        self.assertEqual(output, r1.__str__())
+
+    def test_kwargs_height(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(height=1)
+        output = "[Rectangle] (24) 10/10 - 10/1"
+        self.assertEqual(output, r1.__str__())
+
+    def test_kwargs_id(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(id=98)
+        output = "[Rectangle] (98) 10/10 - 10/10"
+        self.assertEqual(output, r1.__str__())
+
+    def test_kwargs_2args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(width=1, x=2)
+        output = "[Rectangle] (20) 2/10 - 1/10"
+        self.assertEqual(output, r1.__str__())
+
+    def test_kwargs_3args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(y=1, width=2, x=3)
+        output = "[Rectangle] (21) 3/1 - 2/10"
+        self.assertEqual(output, r1.__str__())
+
+    def test_kwargs_4args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(y=1, width=2, x=3, id=89)
+        output = "[Rectangle] (89) 3/1 - 2/10"
+        self.assertEqual(output, r1.__str__())
+
+    def test_kwargs_5args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(y=2, width=6, x=4, id=90, height=5)
+        output = "[Rectangle] (90) 4/2 - 6/5"
+        self.assertEqual(output, r1.__str__())
