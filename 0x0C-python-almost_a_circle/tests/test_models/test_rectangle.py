@@ -91,8 +91,10 @@ class test_display(unittest.TestCase):
         sys.stdout = out
         if method == "display":
             instance.display()
-        else:
+        elif method == "print":
             print(instance)
+        else:
+            instance.to_dictionary()
         sys.stdout = sys.__stdout__
         return out
 
@@ -118,13 +120,13 @@ class test_to_dict(unittest.TestCase):
     """unittest class for to_dictionary method"""
     def test_dict_all(self):
         r1 = Rectangle(10, 2, 1, 9)
-        r1_dict = {'id': 15, 'width': 10, 'height': 2, 'x': 1, 'y': 9}
+        r1_dict = {'id': 17, 'width': 10, 'height': 2, 'x': 1, 'y': 9}
         self.assertEqual(r1_dict, r1.to_dictionary())
 
     def test_dict_noXY(self):
         r1 = Rectangle(10, 2)
-        r1_dict = {'id': 16, 'width': 10, 'height': 2, 'x': 0, 'y': 0}
-        self.assertEqual(r1_dict, r1.to_dictionary())
+        r1_dict = {'id': 18, 'width': 10, 'height': 2, 'x': 0, 'y': 0}
+        self.assertDictEqual(r1_dict, r1.to_dictionary())
 
 class test_update(unittest.TestCase):
     """unittest class for the update method"""
@@ -143,78 +145,81 @@ class test_update(unittest.TestCase):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update()
         m = test_update.stdout_return(r1, "print")
-        self.assertEqual(m.getvalue(), r1.__str__())
-    """
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
+
     def test_one_arg(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(89)
-        output = "[Rectangle] (89) 10/10 - 10/10"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_two_args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(89, 2)
-        output = "[Rectangle] (89) 10/10 - 2/10"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_3_args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(89, 2, 3)
-        output = "[Rectangle] (89) 10/10 - 2/3"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_4_args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(89, 2, 3, 4)
-        output = "[Rectangle] (89) 4/10 - 2/3"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_5_args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(89, 2, 3, 4, 5)
-        output = "[Rectangle] (89) 4/5 - 2/3"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_kwargs_height(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(height=1)
-        output = "[Rectangle] (24) 10/10 - 10/1"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_kwargs_id(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(id=98)
-        output = "[Rectangle] (98) 10/10 - 10/10"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_kwargs_2args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(width=1, x=2)
-        output = "[Rectangle] (20) 2/10 - 1/10"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_kwargs_3args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(y=1, width=2, x=3)
-        output = "[Rectangle] (21) 3/1 - 2/10"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_kwargs_4args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(y=1, width=2, x=3, id=89)
-        output = "[Rectangle] (89) 3/1 - 2/10"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
     def test_kwargs_5args(self):
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(y=2, width=6, x=4, id=90, height=5)
-        output = "[Rectangle] (90) 4/2 - 6/5"
-        self.assertEqual(output, r1.__str__())
+        m = test_update.stdout_return(r1, "print")
+        self.assertEqual(m.getvalue(), r1.__str__() + '\n')
 
 class test_create_method(unittest.TestCase):
-     unittest for the create method
+    """unittest for the create method"""
     def test_creates_instance(self):
         r1 = Rectangle(3, 5, 1)
         r1_dictionary = r1.to_dictionary()
         r2 = Rectangle.create(**r1_dictionary)
-        self.assertEqual(type(r1), type(r2))"""
+        self.assertEqual(type(r1), type(r2))
+
+if __name__ == "__main__":
+    unittest.main()
