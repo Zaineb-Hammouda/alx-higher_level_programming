@@ -253,14 +253,5 @@ class test_save_load_file(unittest.TestCase):
         out = Rectangle.load_from_file()
         self.assertEqual(str(r1), str(out[0]))
 
-    """
-class test_load_from_file(unittest.TestCase):
-    r1 = Rectangle(10, 7, 2, 8)
-        r2 = Rectangle(2, 4)
-            Rectangle.save_to_file([r1, r2])
-
-                with open("Rectangle.json", "r") as file:
-                            print(file.read())"""
-
 if __name__ == "__main__":
     unittest.main()
