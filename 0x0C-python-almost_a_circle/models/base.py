@@ -7,6 +7,7 @@ import json
 import os
 import os.path
 import csv
+import turtle
 
 
 class Base:
@@ -112,3 +113,43 @@ class Base:
                 return [cls.create(**d) for d in ldct]
         else:
             return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """opens a window and draws all the Rectangles and Squares"""
+        """create turtle object"""
+        t = turtle.Turtle()
+        """choose the pensize, shape of the character you will draw with,
+        it's color and the background color of the screen/window"""
+        t.shape("turtle")
+        t.color("lightgreen")
+        t.pensize(4)
+        t.screen.bgcolor("#90EE90")
+
+        """loop over each list and for each obj:
+        move the turtle up and down to skip x and y"""
+        for square in list_squares:
+            t.showturtle()
+            t.up()
+            t.goto(square.x, square.y)
+            t.down()
+            """ move turtle to draw width/size of the square"""
+            for i in range(2):
+                for j in range(2):
+                    t.forward(square.width)
+                    t.left(90)
+            t.hideturtle()
+
+        for rectangle in list_rectangles:
+            t.showturtle()
+            t.up()
+            t.goto(square.x, square.y)
+            t.down()
+            for i in range(2):
+                t.forward(rectangle.width)
+                t.left(90)
+                t.forward(rectangle.height)
+                t.left(90)
+            t.hideturtle()
+
+        t.exitonclick()
