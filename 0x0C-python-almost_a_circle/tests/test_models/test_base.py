@@ -76,3 +76,37 @@ class test_from_json_srting(unittest.TestCase):
     def test_return_list(self):
         j_list = Base.from_json_string('[{"id": 12}]')
         self.assertEqual([{'id': 12}], j_list)
+
+class test_save_load_csv(unittest.TestCase):
+    """ unittest class to test save_to_csv_file and
+    load_from_csv_file"""
+    def test_save_1_obj(self):
+        r1 = Rectangle(10, 3, 2, 6, 5)
+        Rectangle.save_to_file_csv([r1])
+        with open("Rectangle.csv", "r") as f:
+            self.assertTrue("5,10,3,2,6", f.read())
+
+    def test_save_2_objs(self):
+        r1 = Square(10, 7, 2, 8)
+        r2 = Square(10, 4, 1, 2)
+        Square.save_to_file_csv([r1, r2])
+        with open("Rectangle.csv", "r") as f:
+            self.assertTrue("8,10,7,2\n2,4,10,4,1", f.read())
+
+    def test_load_1_obj(self):
+        s1 = Square(2, 1, 4, 3)
+        s2 = Square(10, 5, 6, 3)
+        Square.save_to_file_csv([s1, s2])
+        out = Square.load_from_file_csv()
+        self.assertEqual(str(s1), str(out[0]))
+
+    def test_check_all_types(self):
+        r1 = Rectangle(1, 8, 2, 9, 1)
+        r2 = Rectangle(5, 3, 7, 4, 6)
+        r3 = Rectangle(2, 3, 5, 6, 3)
+        Rectangle.save_to_file_csv([r1, r2, r3])
+        out = Rectangle.load_from_file_csv()
+        self.assertTrue(all(type(obj) == Rectangle for obj in out))
+
+if __name__ == "__main__":
+    unittest.main()

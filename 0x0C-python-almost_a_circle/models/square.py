@@ -11,10 +11,6 @@ class Square(Rectangle):
     """
     def __init__(self, size, x=0, y=0, id=None):
         """ initializes private attributes """
-        self.width = size
-        self.height = size
-        self.x = x
-        self.y = y
         super().__init__(size, size, x, y, id)
 
     @property
@@ -92,9 +88,9 @@ class Square(Rectangle):
                     if i is not None:
                         self.id = i
                     else:
-                        self.__init__(self.width, self.height, self.x, self.y)
+                        self.__init__(self.size, self.x, self.y)
                 elif arg == 1:
-                    self.width = i
+                    self.size = i
                 elif arg == 2:
                     self.x = i
                 else:
@@ -106,9 +102,9 @@ class Square(Rectangle):
                     if value is not None:
                         self.id = value
                     else:
-                        self.__init__(self.width, self.height, self.x, self.y)
+                        self.__init__(self.size, self.x, self.y)
                 elif key == "size":
-                    self.width = value
+                    self.size = value
                 elif key == "x":
                     self.x = value
                 elif key == "y":

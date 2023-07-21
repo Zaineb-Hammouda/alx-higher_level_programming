@@ -125,7 +125,7 @@ class test_to_dict(unittest.TestCase):
 
     def test_dict_noXY(self):
         r1 = Rectangle(10, 2)
-        r1_dict = {'id': 20, 'width': 10, 'height': 2, 'x': 0, 'y': 0}
+        r1_dict = {'id': 25, 'width': 10, 'height': 2, 'x': 0, 'y': 0}
         self.assertDictEqual(r1_dict, r1.to_dictionary())
 
 class test_update(unittest.TestCase):
@@ -239,7 +239,7 @@ class test_save_load_file(unittest.TestCase):
 
     def test_one_obj(self):
         Rectangle.save_to_file([Rectangle(1, 2)])
-        m = '[{"id": 18, "width": 1, "height": 2, "x": 0, "y": 0}]'
+        m = '[{"id": 23, "width": 1, "height": 2, "x": 0, "y": 0}]'
         with open("Rectangle.json") as f:
             self.assertEqual(m, f.read())
 

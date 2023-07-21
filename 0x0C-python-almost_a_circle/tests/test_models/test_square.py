@@ -200,7 +200,7 @@ class test_save_load_file(unittest.TestCase):
 
     def test_one_obj(self):
         Square.save_to_file([Square(1)])
-        m = '[{"id": 41, "size": 1, "x": 0, "y": 0}]'
+        m = '[{"id": 46, "size": 1, "x": 0, "y": 0}]'
         with open("Square.json") as f:
             self.assertEqual(m, f.read())
 
