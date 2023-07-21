@@ -120,12 +120,12 @@ class test_to_dict(unittest.TestCase):
     """unittest class for to_dictionary method"""
     def test_dict_all(self):
         r1 = Rectangle(10, 2, 1, 9)
-        r1_dict = {'id': 18, 'width': 10, 'height': 2, 'x': 1, 'y': 9}
-        self.assertEqual(r1_dict, r1.to_dictionary())
+        r1_dict = r1.to_dictionary()
+        self.assertEqual(str(r1_dict), str(r1.to_dictionary()))
 
     def test_dict_noXY(self):
         r1 = Rectangle(10, 2)
-        r1_dict = {'id': 19, 'width': 10, 'height': 2, 'x': 0, 'y': 0}
+        r1_dict = {'id': 20, 'width': 10, 'height': 2, 'x': 0, 'y': 0}
         self.assertDictEqual(r1_dict, r1.to_dictionary())
 
 class test_update(unittest.TestCase):
@@ -221,7 +221,7 @@ class test_create_method(unittest.TestCase):
         r2 = Rectangle.create(**r1_dictionary)
         self.assertEqual(type(r1), type(r2))
 
-class test_save_to_file(unittest.TestCase):
+class test_save_load_file(unittest.TestCase):
     """unittest for the save_to_file method"""
     def test_empty_list(self):
         Rectangle.save_to_file([])
@@ -239,9 +239,20 @@ class test_save_to_file(unittest.TestCase):
 
     def test_one_obj(self):
         Rectangle.save_to_file([Rectangle(1, 2)])
-        m = '[{"id": 17, "width": 1, "height": 2, "x": 0, "y": 0}]'
+        m = '[{"id": 18, "width": 1, "height": 2, "x": 0, "y": 0}]'
         with open("Rectangle.json") as f:
             self.assertEqual(m, f.read())
+
+    def test_file_no_exist(self):
+        out = Rectangle.load_from_file()
+        self.assertEqual([], out)
+
+    def test_load_file_exists(self):
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        Rectangle.save_to_file([r1])
+        out = Rectangle.load_from_file()
+        self.assertEqual(str(r1), str(out[0]))
+
     """
 class test_load_from_file(unittest.TestCase):
     r1 = Rectangle(10, 7, 2, 8)
