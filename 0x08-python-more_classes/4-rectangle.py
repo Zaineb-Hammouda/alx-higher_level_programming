@@ -22,9 +22,9 @@ class Rectangle:
         rect.pop()
         return "".join(rect)
 
-    def __repr(self):
+    def __repr__(self):
         """returns string representation of our rectangle"""
-        return "Rectangle({:d}, {:d}".format(self.__width, self.__height)
+        return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
 
     @property
     def width(self):
