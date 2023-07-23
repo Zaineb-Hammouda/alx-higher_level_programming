@@ -5,6 +5,7 @@
 class Rectangle:
     """ defines a ractangle """
     number_of_instances = 0
+
     def __init__(self, width=0, height=0):
         """ instantiation with width and height"""
         self.__height = height
