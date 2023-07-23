@@ -69,8 +69,7 @@ class Rectangle:
 
     @classmethod
     def square(cls, size=0):
-        instance = cls(size, size)
-        return instance
+        return Rectangle(size, size)
 
     def __str__(self):
         """ depicts data as string"""
