@@ -93,4 +93,3 @@ class Rectangle:
         instance.width = size
         instance.height = size
         return instance
-
