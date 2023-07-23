@@ -67,10 +67,6 @@ class Rectangle:
         else:
             return rect_1
 
-    @classmethod
-    def square(cls, size=0):
-        return Rectangle(size, size)
-
     def __str__(self):
         """ depicts data as string"""
         rect = []
@@ -92,3 +88,7 @@ class Rectangle:
         """deletes object of a class and prints a message"""
         Rectangle.number_of_instances -= 1
         print("{:s}".format("Bye rectangle..."))
+
+    @classmethod
+    def square(cls, size=0):
+        return cls(size, size)
