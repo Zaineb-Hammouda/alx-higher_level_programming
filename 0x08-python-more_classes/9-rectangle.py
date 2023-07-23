@@ -60,12 +60,10 @@ class Rectangle:
             raise TypeError("rect_1 must be an instance of Rectangle")
         if not isinstance(rect_2, Rectangle):
             raise TypeError("rect_2 must be an instance of Rectangle")
-        if rect_1.area() > rect_2.area():
+        if rect_1.area() >= rect_2.area():
             return rect_1
-        elif rect_2.area() > rect_1.area():
-            return rect_2
         else:
-            return rect_1
+            return rect_2
 
     def __str__(self):
         """ depicts data as string"""
@@ -75,7 +73,7 @@ class Rectangle:
         else:
             for i in range(self.__height):
                 for j in range(self.__width):
-                    rect.append(str(self.print_symbol))
+                    rect.append("#")
                 rect.append("\n")
             rect.pop()
         return "".join(rect)
