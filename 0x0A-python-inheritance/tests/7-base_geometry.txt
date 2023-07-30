@@ -1,0 +1,68 @@
+the "7-base_geometry" module
+=======================
+
+Using "BaseGeometry" class
+---------------------
+
+importing the class from the module:
+	>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+check module docstring:
+	>>> m = __import__('7-base_geometry').__doc__
+	>>> len(m) > 1
+	True
+
+check class doctsing:
+	>>> f = __import__('7-base_geometry').BaseGeometry.__doc__
+	>>> len(m) > 1
+	True
+
+check instantiation:
+	>>> bg = BaseGeometry()
+
+
+check area():
+	>>> bg = BaseGeometry()
+	>>> bg.area()
+	Traceback (most recent call last):
+	...
+	Exception: area() is not implemented
+
+check integer_validator with no args:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator()
+	Traceback (most recent call last):
+        ...
+        TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+check integer_validator with 1 arg:
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("age")
+        Traceback (most recent call last):
+        ...
+        TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+check integer_validator normal case:
+        >>> bg = BaseGeometry()
+        >>> bg.integer_validator("age", 1)
+
+check integer_validator with value not int:
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("name", "John")
+	Traceback (most recent call last):
+	...
+	TypeError: name must be an integer
+
+check value being a negative number:
+	>>> bg = BaseGeometry()
+        >>> bg.integer_validator("distance", -4)
+	Traceback (most recent call last):
+	...
+	ValueError: distance must be greater than 0
+
+check with value as 0:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("age", 0)
+	Traceback (most recent call last):
+        ...
+        ValueError: age must be greater than 0
