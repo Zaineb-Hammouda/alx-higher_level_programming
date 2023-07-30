@@ -4,10 +4,10 @@
 
 class MyInt(int):
     """ inherits from int"""
-    def __ee__(self, other):
+    def __eq__(self, other):
         """the equality method"""
-        return super().__ee__(other)
+        return super().__ne__(other)
 
     def __ne__(self, other):
         """ the inequality method"""
-        return super().__ne__(other)
+        return super().__eq__(other)
